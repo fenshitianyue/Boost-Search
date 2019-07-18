@@ -1,0 +1,33 @@
+syntax="proto2";
+
+package doc_index_proto;
+
+message DocInfo {
+  // 一个文档对应的信息
+  required uint64 id = 1;
+  required string title = 2;
+  required string content = 3;
+  required string show_url = 4;
+  required string jump_url = 5;
+};
+
+message Weight {
+  required uint64 doc_id = 1;
+  required int32 weight = 2;
+  // 该关键词在正文中第一次出现的位置
+  required int32 first_pos = 3;  
+}
+
+message KwdInfo {
+  // 关键词的字面值
+  required string key = 1;
+  // 文档 id 的列表
+  repeated Weight doc_list = 2;
+};
+
+message Index {
+  // Index 结构包含了正排索引 + 倒排索引
+  repeated DocInfo forward_index = 1;
+  // kwd => key word
+  repeated KwdInfo inverted_index = 2;
+};
