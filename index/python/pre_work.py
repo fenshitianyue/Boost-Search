@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding:utf-8
+
 import os
 import re
 from bs4 import BeautifulSoup
@@ -75,33 +76,25 @@ def enum_file(input_path):
             file_list.append(basedir + '/' + f)
     return file_list
 
-
 def parse_url(file_path):
-    # input_path = ../data/input/
-    # file_path = ../data/input/html/intrusive/list.html
     return url_prefix + file_path[len(input_path):]
-
 
 def parse_title(html):
     soup = BeautifulSoup(html, 'html.parser')
     return soup.find('title').string
 
-
 def parse_content(html):
     return filter_tags(html)
-
 
 def parse_file(file_path):
     '得到的结果是一个三元组: jump_url, title, content'
     html = open(file_path).read()
     return parse_url(file_path), parse_title(html), parse_content(html)
 
-
 def write_result(result, output_file):
     '把三元组当做一行写入到输出文件中'
     if result[0] and result[1] and result[2]:
         output_file.write(result[0] + '\3' + result[1] + '\3' + result[2] + '\n')
-
 
 def run():
     '预处理操作的入口'
@@ -118,7 +111,6 @@ def run():
 # def test1():
 #     file_list = enum_file(input_path)
 #     print file_list
-#
 #
 # def test2():
 #     file_list = enum_file(input_path)
