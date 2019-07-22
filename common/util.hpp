@@ -13,6 +13,7 @@ public:
   static void Split(const std::string& input, std::vector<std::string>* output, const std::string& split_char) {
     boost::split(*output, input, boost::is_any_of(split_char), boost::token_compress_off);
   }
+
   static int32_t FindSentenceBeg(const std::string& content, int32_t first_pos) {
     for(auto i = first_pos; i >= 0; --i) {
       if (content[i] == ';' || content[i] == ',' || content[i] == '?' || content[i] == '!' || (content[i] == '.' 
@@ -77,4 +78,27 @@ public:
   }
 };
 
+class TimeUtil {
+public:
+  //获取到秒级时间戳
+  static int64_t TimeStamp() {
+    timeval tv;
+    ::gettimeofday(&tv, NULL);
+    return tv.tv_sec;
+  }
+  //获取到毫秒级时间戳
+  static int64_t TimeStampMS() {
+    timeval tv;
+    ::gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+  }
+  //获取到微秒级时间戳
+  static int64_t TimeStampUS() {
+    timeval tv;
+    ::gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000 * 1000 + tv.tv_usec;
+  }
+};
+
 } // end common
+
