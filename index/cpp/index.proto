@@ -2,6 +2,12 @@ syntax="proto2";
 
 package doc_index_proto;
 
+message Pair {
+  //每个分词结果的前闭后开区间
+  required uint32 beg = 1;
+  required uint32 end = 2;
+}
+
 message DocInfo {
   // 一个文档对应的信息
   required uint64 id = 1;
@@ -9,6 +15,9 @@ message DocInfo {
   required string content = 3;
   required string show_url = 4;
   required string jump_url = 5;
+  //保存分词结果
+  repeated Pair title_token = 6;
+  repeated Pair content_token = 7;
 };
 
 message Weight {
