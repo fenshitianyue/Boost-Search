@@ -23,7 +23,7 @@ Index::Index() : jieba_(fLS::FLAGS_dict_path,
 
 // 从 raw_input 文件中读数据, 在内存中构建成索引结构
 bool Index::Build(const std::string& input_path) {
-  std::cout << "Index building..." << std::endl; //TODO:临时日志
+  //std::cout << "Index building..." << std::endl; //TODO:临时日志
   LOG(INFO) << "Index Build";
   // 1. 按行读取文件内容, 针对读到的每一行数据进行处理
   std::ifstream file(input_path.c_str());
@@ -200,7 +200,7 @@ bool Index::CmpWeight(const Weight& w1, const Weight& w2) {
 
 // 把内存中的索引数据保存到磁盘上
 bool Index::Save(const std::string& output_path) {
-  std::cout << "Index Saved..." << std::endl; //TODO:临时日志
+  //std::cout << "Index Saved..." << std::endl; //TODO:临时日志
   LOG(INFO) << "Index Save";
   // 1. 把内存中的索引结构序列化成字符串
   std::string proto_data;
@@ -234,7 +234,7 @@ bool Index::ConvertToProto(std::string* proto_data) {
 
 // 把磁盘上的文件加载到内存的索引结构中
 bool Index::Load(const std::string& index_path) {
-  std::cout << "Index loading..." << std::endl; //TODO:临时日志
+  //std::cout << "Index loading..." << std::endl; //TODO:临时日志
   LOG(INFO) << "Index Load";
   // 1. 从磁盘上把索引文件读到内存中
   std::string proto_data;
@@ -269,7 +269,7 @@ bool Index::ConvertFromProto(const std::string& proto_data) {
 // 调试用的接口, 把内存中的索引数据按照一定的格式打印到
 // 文件中
 bool Index::Dump(const std::string& forward_dump_path, const std::string& inverted_dump_path) {
-  std::cout << "Index dumping..." << std::endl; //TODO：临时日志
+  //std::cout << "Index dumping..." << std::endl; //TODO：临时日志
   LOG(INFO) << "Index Dump";
   // 1. 处理正排
   std::ofstream forward_dump_file(forward_dump_path.c_str());
