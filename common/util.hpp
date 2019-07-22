@@ -13,6 +13,17 @@ public:
   static void Split(const std::string& input, std::vector<std::string>* output, const std::string& split_char) {
     boost::split(*output, input, boost::is_any_of(split_char), boost::token_compress_off);
   }
+  static int32_t FindSentenceBeg(const std::string& content, int32_t first_pos) {
+    for(auto i = first_pos; i >= 0; --i) {
+      if (content[i] == ';' || content[i] == ',' || content[i] == '?' || content[i] == '!' || (content[i] == '.' 
+          && content[i + 1] == ' ')) {
+        return i + 1;
+      }
+    }
+    // 如果往前找的过程中没有找到句子的分割符, 就认为当前所在的句子
+    // 就是文章的第一句话. 也就可以用 0 表示句子的开始
+    return 0;
+  }
 };
 
 class DictUtil {
