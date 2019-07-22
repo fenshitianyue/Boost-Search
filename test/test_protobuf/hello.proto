@@ -1,0 +1,6 @@
+syntax="proto2";
+
+message Hello {
+  required string name = 1;
+  required int32 score = 2;
+};
