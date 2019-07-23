@@ -7,11 +7,11 @@ FLAG=-g -std=c++11 -I ~/third_part/include -L ~/third_part/lib\
 
 server:server_main.cc server.pb.cc doc_searcher.cc ../../index/cpp/libindex.a
 	g++ $^  -o $@ $(FLAG)
-	cp -f $@ ../bin
+	mv -f $@ ../bin
 
 server.pb.cc:server.proto
 	$(PROTOC) server.proto --cpp_out=.
 
 .PHONY:clean
 clean:
-	rm server server.pb.*
+	rm server.pb.*
