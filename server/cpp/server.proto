@@ -1,0 +1,39 @@
+syntax="proto2";
+package doc_server_proto;
+
+option cc_generic_services = true;
+
+//请求格式
+message Request {
+  //一条请求的身份标识
+  required uint64 sid = 1;
+  //请求发送的时间戳
+  required int64 timestamp = 2;
+  required string query = 3;
+};
+
+//一条搜索结果包含的信息
+message Item {
+  required string title = 1;
+  required string desc = 2;
+  required string show_url = 3;
+  required string jump_url = 4;
+};
+
+//响应格式
+message Response {
+  //一条请求的身份标识
+  required uint64 sid = 1;
+  //响应构造的时间戳
+  required int64 timestamp = 2;
+  //包含响应的若干的搜索结构
+  repeated Item item = 3;
+  //服务器的错误码：0表示正确，其他不同的错误码表示不同的原因
+  optional int32 err_code = 4;
+};
+
+//说明RPC远程调用的函数
+service DocServerAPI {
+  rpc Search(Request) returns (Response);
+};
+
