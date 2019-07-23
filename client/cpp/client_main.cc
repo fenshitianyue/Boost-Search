@@ -5,7 +5,7 @@
 #include "server.pb.h"
 
 DEFINE_string(server_addr, "127.0.0.1:10000", "请求的搜索服务器的地址");
-DEFINE_string(template_path, "./wwwroot/front/template/search_page.html", "模板文件的路径");
+DEFINE_string(template_path, "../../front/template/search_page.html", "模板文件的路径");
 
 namespace doc_client {
 
