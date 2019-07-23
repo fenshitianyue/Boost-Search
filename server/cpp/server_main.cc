@@ -5,7 +5,7 @@
 #include "doc_searcher.h"
 
 DEFINE_string(port, "10000", "服务器端口号");
-DEFINE_string(index_path, "../index/data/output/index_file", "索引文件的路径");
+DEFINE_string(index_path, "../index/index_file", "索引文件的路径");
 
 namespace doc_server {
 
