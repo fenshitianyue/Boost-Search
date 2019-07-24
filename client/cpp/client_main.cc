@@ -52,12 +52,8 @@ void PackageRequest(Request* req) {
   req->set_timestamp(common::TimeUtil::TimeStamp());
   // 此处的查询词, 后面要根据 CGI 的方式从环境变量
   // 中获取到这个查询词
-  char buf[1024] = {0};
-  GetQueryString(buf);
-  // 经过刚才这个函数的调用, buf 中就包含了
-  // query=filesystem 字符串
   char query[1024] = {0};
-  sscanf(buf, "query=%s", query);
+  GetQueryString(query);
   req->set_query(query);
 }
 
