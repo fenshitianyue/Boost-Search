@@ -1,3 +1,3 @@
 export REQUEST_METHOD=GET
-export QUERY_STRING="query=asio"
+export QUERY_STRING="1=filesystem"
 ./client
