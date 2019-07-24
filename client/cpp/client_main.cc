@@ -27,7 +27,7 @@ int GetQueryString(char output[]) {
       fprintf(stderr, "QUERY_STRING failed\n");
       return -1;
     }
-    strcpy(output, query_string);
+    strcpy(output, query_string + 2); //去掉 1=
   } else {
     // 3. 如果是 POST 方法, 先通过环境变量获取到 CONTENT_LENGTH
     //    再从标准输入中读取 body
@@ -105,7 +105,7 @@ void ParseResponse(const Response& resp) {
   // 对模板进行替换
   std::string html;
   tpl->Expand(&html, &dict);
-  std::cout << html;
+  std::cout << html.data(); //TODO：这里需要和http框架对接
   return;
 }
 
