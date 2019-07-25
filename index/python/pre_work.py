@@ -71,12 +71,15 @@ def enum_file(input_path):
     for basedir, dirnames, filenames in os.walk(input_path):
         for f in filenames:
             # 只关注扩展名为 html 的文件
-            if os.path.splitext(f)[-1] != '.html':
-                continue
-            file_list.append(basedir + '/' + f)
+            file_path = basedir + '/' + f # 需要先重定位文件的存储路径
+            if os.path.splitext(file_path)[-1] == '.html': # 然后再判断是不是HTML文件
+                file_list.append(file_path)
     return file_list
 
 def parse_url(file_path):
+    '''
+    获取到当前HTML文件对应的在线版本的文档的路径
+    '''
     return url_prefix + file_path[len(input_path):]
 
 def parse_title(html):
@@ -84,6 +87,9 @@ def parse_title(html):
     return soup.find('title').string
 
 def parse_content(html):
+    '''
+    解析HTML中的正文，需要先去掉HTML文件中的标签
+    '''
     return filter_tags(html)
 
 def parse_file(file_path):
@@ -97,8 +103,8 @@ def write_result(result, output_file):
         output_file.write(result[0] + '\3' + result[1] + '\3' + result[2] + '\n')
 
 def run():
-    '预处理操作的入口'
-    # 1. 遍历 input_path 所有的文件和路径
+    '预处理操作的入口函数：包含了预处理过程中的所有核心流程'
+    # 1. 遍历 input_path 下所有的文件和路径
     file_list = enum_file(input_path)
     with open(output_path, 'w') as output_file:
         # 2. 针对每一个文件, 解析其中的内容
@@ -108,18 +114,12 @@ def run():
             write_result(result, output_file)
 
 
-# def test1():
-#     file_list = enum_file(input_path)
-#     print file_list
-#
-# def test2():
-#     file_list = enum_file(input_path)
-#     for f in file_list:
-#         result = parse_file(f)
-#         print result[2]
-
+def test():
+    '枚举目录的测试函数'
+    file_list = enum_file(input_path)
+    print file_list
 
 if __name__ == '__main__':
     run()
-    # test1()
-    # test2()
+    # test()
+
