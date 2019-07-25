@@ -7,11 +7,11 @@ all:index_builder index_dump
 
 index_builder:index_builder.cc libindex.a
 	g++ index_builder.cc ./libindex.a $(FLAG) -o $@
-	cp -f $@ ../bin/
+	mv -f $@ ../bin/
 
 index_dump:index_dump.cc libindex.a
 	g++ index_dump.cc ./libindex.a $(FLAG) -o $@
-	cp -f $@ ../bin/
+	mv -f $@ ../bin/
 
 libindex.a:index.cc index.pb.cc
 	g++ -c index.cc -o index.o $(FLAG)
@@ -23,6 +23,6 @@ index.pb.cc:index.proto
 
 .PHONY:clean
 clean:
-	rm -f index_dump index_builder *.o libindex.a *.pb.cc *.pb.h
+	rm -f *.o libindex.a *.pb.cc *.pb.h
 
 
