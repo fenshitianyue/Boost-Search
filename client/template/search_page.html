@@ -1,13 +1,37 @@
-<html>
-  <body>
-  <!--此处需要包含若干个 item-->
-  {{#item}}
-  <div>
-    <div><a href="{{jump_url}}">{{title}}</a><div>
-    <div>{{desc}}</div>
-    <div>{{show_url}}</div>
-  </div>
-  <hr/>
-  {{/item}}
-  </body>
+<!DOCTYPE html>
+    <head>
+        <style>
+            .total_div{
+                width: 540px;
+                padding-left: 121px;
+                padding-top: 5px;
+            }
+            .child_div{
+                margin-bottom: 14px;
+                font-weight: normal;
+                border-collapse: collapse;
+            }
+            .content_div{
+                font-size: 13px;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            .url_div{
+                font-size: 13px;
+                font-style: italic;
+                font-family: 'Times New Roman', Times, serif;
+            }
+        </style>
+    </head>
+    
+    <body>
+    {{#item}}
+        <div class="total_div">
+            <div class="child_div">
+              <a href="{{jump_url}}">{{title}}</a><br>
+                <div class="content_div">{{desc}}<br/></div> 
+                <div class="url_div">{{show_url}}</div>
+            </div>
+        </div>
+    {{/item}}
+    </body>
 </html>
