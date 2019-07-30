@@ -38,6 +38,7 @@ public:
     while (std::getline(file, line)) {
       set_.insert(line);
     }
+    file.close();
     return true;
   }
   
@@ -58,7 +59,7 @@ public:
     }
     //先获取文件长度
     file.seekg(0, file.end);
-    int length = file.tellg();
+    size_t length = file.tellg();
     file.seekg(0, file.beg);
     content->resize(length);
     file.read(const_cast<char*>(content->data()), length);
